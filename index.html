@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Casa Fashani</title>
+    <style>
+        @font-face {
+    font-family: 'Escrita Manuelina';
+    src: url('escrita-manuelina.woff2') format('woff2'),
+         url('escrita-manuelina.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    box-sizing: border-box; /* Prevents layout issues by including padding in width calculations */
+}
+body {
+    font-family: 'Segoe Script', serif;
+    background: linear-gradient(135deg, #000 0%, #111 100%); /* Subtle gradient for depth */
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.6; /* Better line spacing */
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+.logo {
+    font-size: 2em;
+    font-weight: 700;
+    font-family: 'Escrita Manuelina', serif;
+}
+.logo .casa { color: #FF0000; }
+.logo .fashani { color: #FFF; }
+.nav-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    justify-content: center;
+}
+.nav {
+    display: flex;
+    gap: 20px;
+}
+.nav button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 10px; /* Larger touch target */
+}
+.nav button:hover { color: #FF0000; }
+.lang-selector {
+    display: flex;
+    gap: 10px;
+}
+.nav button:before {
+    content: '🍽️'; /* Emoji icon for a food/restaurant theme */
+    margin-right: 5px;
+}
+.lang-selector button {
+    background: #333;
+    border: none;
+    color: #fff;
+    padding: 8px 12px; /* Adjusted for touch */
+    cursor: pointer;
+    border-radius: 5px;
+}
+.lang-selector button.active { background: #FF0000; }
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: #fff;
+    border: none;
+    padding: 18px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 0 0 10px rgba(37, 211, 102, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+}
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), 0 0 15px rgba(37, 211, 102, 0.5);
+}
+.whatsapp-btn i {
+    font-size: 1.8em;
+}
+.section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px 20px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out; /* Fade-in effect */
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.homepage {
+    background-image: url('restaurant.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Parallax effect for elegance */
+    position: relative;
+}
+.homepage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+.homepage > * { position: relative; z-index: 2; }
+.homepage h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Adds depth to titles */
+}
+.homepage h1 .casa { color: #FF0000; }
+.homepage h1 .fashani { color: #FFF; }
+.homepage p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    font-family: 'Arial', sans-serif; /* Contrast with script font for readability */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}.btn {
+    background: linear-gradient(135deg, #FF0000, #CC0000); /* Gradient button */
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-family: 'Escrita Manuelina', serif;
+    min-width: 120px;
+    min-height: 44px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.btn:hover {
+    background: linear-gradient(135deg, #CC0000, #AA0000);
+    transform: scale(1.05); /* Slight grow */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+@media (min-width: 769px) {
+    .menu-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns side-by-side on desktop */
+    }
+}
+.dish {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px; /* New: Limits width to 300px on desktop for narrower frames */
+}
+.dish:hover {
+    transform: translateY(-10px); /* Lift effect */
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+}
+.dish img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+@media (min-width: 769px) {
+    .menu-grid {
+        display: flex; /* Switch to flexbox for single-row layout */
+        flex-wrap: wrap; /* Allows wrapping to next row if too many dishes */
+        justify-content: center; /* Centers the row(s) */
+        gap: 20px;
+        max-width: 1200px;
+        width: 100%;
+    }
+    .dish {
+        flex: 0 0 auto; /* Allows natural width, up to max-width */
+        max-width: 300px; /* Keeps frames narrow */
+    }
+}
+.reservation-form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.reservation-form input, .reservation-form textarea {
+    width: 100%;
+    padding: 12px; /* Larger for mobile typing */
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    font-size: 1em;
+}
+.reviews {
+    max-width: 800px;
+    width: 100%;
+}
+.review {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border-left: 5px solid #FF0000; /* Accent border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.stars { color: #FFD700; }
+.contact {
+    max-width: 800px;
+    width: 100%;
+}
+.map {
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    body { font-size: 14px; }
+    .header { 
+        flex-direction: column; 
+        gap: 10px; 
+        padding: 15px; /* Reduce padding to make header more compact */
+    }
+    .nav { 
+        flex-wrap: wrap; 
+        gap: 10px;
+    }
+    .nav button { 
+        font-size: 0.9em; 
+        padding: 8px; 
+    }
+    .lang-selector { 
+        gap: 5px; 
+    }
+    .lang-selector button { 
+        padding: 6px 10px; 
+        font-size: 0.8em; 
+    }
+    .whatsapp-btn {
+        bottom: 15px;
+        right: auto;
+        left: 15px;
+        width: 50px;
+        height: 50px;
+        padding: 15px;
+        font-size: 1.3em;
+    }
+    .whatsapp-btn i { font-size: 1.5em; }
+    .section { padding: 180px 15px 80px; min-height: auto; }
+    .homepage h1 { font-size: 2.5em; }
+    .homepage p { font-size: 1.1em; margin-bottom: 30px; }
+    .btn { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); } /* Softer shadows on mobile */ 
+    }
+    .menu-grid {
+        grid-template-columns: 1fr; /* Keep single column */
+        gap: 15px;
+        max-width: 1200px;
+        width: 100%;
+        justify-content: center; /* New: Centers the column on mobile */
+    }
+    .dish { margin-bottom: 20px; } /* Extra spacing */ 
+    }
+    .dish img { 
+        height: 150px;
+    }
+    .reservation-form { 
+        padding: 30px 20px; 
+    }
+    .reservation-form input, .reservation-form textarea { 
+        padding: 10px; 
+        font-size: 0.9em; 
+    }
+    .review { 
+        padding: 15px; 
+        margin: 15px 0; 
+    }
+    .map { 
+        height: 300px; 
+    }
+}
+/* Extra small screens (e.g., very narrow phones) */
+@media (max-width: 480px) {
+    .homepage h1 { font-size: 2em; }
+    .homepage p { font-size: 1em; }
+    .btn { padding: 10px 20px; }
+    .menu-grid { gap: 10px; }
+    .dish img { height: 120px; }
+    .reservation-form { padding: 20px 15px; }
+    .map { height: 250px; }
+}
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></svg>') repeat;
+    pointer-events: none;
+    z-index: -1;
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo" onclick="showSection('homepage')" style="cursor: pointer;">
+    <span class="casa">Casa</span> <span class="fashani">Fashani</span>
+</div>
+        <div class="nav-group">
+            <nav class="nav">
+                <button onclick="showSection('menu')">Menu</button>
+                <button onclick="showSection('reservations')">Reservations</button>
+                <button onclick="showSection('reviews')">Reviews</button>
+                <button onclick="showSection('contact')">Contact</button>
+            </nav>
+            <div class="lang-selector">
+                <button onclick="setLanguage('pt')" class="active">PT</button>
+                <button onclick="setLanguage('en')">EN</button>
+                <button onclick="setLanguage('fr')">FR</button>
+                <button onclick="setLanguage('es')">ES</button>
+            </div>
+        </div>
+    </header>
+
+    <button class="whatsapp-btn" onclick="window.open('https://wa.me/351961932550', '_blank')" aria-label="Reserve via WhatsApp">
+    <i class="fab fa-whatsapp"></i> <!-- WhatsApp icon from Font Awesome -->
+</button>
+
+    <section id="homepage" class="section homepage">
+        <h1><span class="casa">Casa</span> <span class="fashani">Fashani</span></h1>
+        <p data-lang="pt">Cozinha Portuguesa tradicional para partilhar em família. Pratos caseiros, peixe fresco e grelhados no carvão, à beira-mar.</p>
+        <button class="btn" onclick="showSection('reservations')" data-lang="pt">Reservar</button>
+    </section>
+
+    <section id="menu" class="section" style="display: none;">
+        <h2 data-lang="pt">Pratos de Destaque</h2>
+        <div class="menu-grid">
+            <div class="dish">
+                <img src="feijoada.jpg" alt="Feijoada de Búzios">
+                <h3 data-lang="pt">Feijoada de Búzios</h3>
+            </div>
+            <div class="dish">
+                <img src="Massada.jpg" alt="Massada de Tamboril com Gambas">
+                <h3 data-lang="pt">Massada de Tamboril com Gambas</h3>
+            </div>
+            <div class="dish">
+                <img src="grelhado.jpg" alt="Peixe fresco grelhado">
+                <h3 data-lang="pt">Peixe fresco grelhado</h3>
+            </div>
+        </div>
+        <p id="menu-more" data-lang="pt">Mas temos muito mais a oferecer.</p>  <!-- New line added -->
+        <button class="btn" onclick="window.open('CasaFashaniMenu.pdf', '_blank')" data-lang="pt">Ver Menu Completo</button>
+    </section>
+
+    <section id="reservations" class="section" style="display: none;">
+    <h2 data-lang="pt">Reservas</h2>
+    <div class="reservation-form">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_XaKk2kdw5K7iH29dcyWS2EtNECECwVF8-8dazzHOXbofqA/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 10px;">Loading…</iframe>
+    </div>
+    <p data-lang="pt">Para grupos grandes, contacte diretamente. Grupos de 10+ pessoas: máximo de 6 pratos diferentes.</p>
+</section>
+
+    <section id="reviews" class="section" style="display: none;">
+        <h2 data-lang="pt">Avaliações</h2>
+        <div class="reviews">
+            <div class="review">
+                <p><strong>Ron Moses</strong> ★★★★★ – <span data-lang="pt">Excelente hospitalidade e comida.</span></p>
+            </div>
+            <div class="review">
+                <p><strong>Alexander Ricke</strong> ★★★★★ – <span data-lang="pt">Peixe fresco, recomendações honestas.</span></p>
+            </div>
+            <div class="review">
+                <p><strong>Melanie McHale</strong> ★★★★★ – <span data-lang="pt">Serviço acima e além.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section" style="display: none;">
+        <h2 data-lang="pt">Contacto</h2>
+        <p data-lang="pt">Avenida do Brasil 122, Buarcos, Figueira da Foz</p>
+        <p data-lang="pt">+351 233 415 372</p>
+        <iframe
+  class="map"
+  src="https://www.google.com/maps?q=Casa+Fashani+Avenida+do+Brasil+122+Buarcos&output=embed"
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+    </section>
+
+    <script>
+        const languages = {
+            pt: {
+                homeTitle: "Casa Fashani",
+                homeDesc: "Cozinha Portuguesa tradicional para partilhar em família. Pratos caseiros, peixe fresco e grelhados no carvão, à beira-mar.",
+                reserveBtn: "Reservar",
+                menuTitle: "Pratos de Destaque",
+                menuBtn: "Ver Menu Completo",
+                resTitle: "Reservas",
+                resNote: "Para grupos grandes, contacte diretamente. Grupos de 10+ pessoas: máximo de 6 pratos diferentes.",
+                resBtn: "Enviar Reserva",
+                revTitle: "Avaliações",
+                rev1: "Excelente hospitalidade e comida.",
+                rev2: "Peixe fresco, recomendações honestas.",
+                rev3: "Serviço acima e além.",
+                conTitle: "Contacto",
+                conAddr: "Avenida do Brasil 122, Buarcos, Figueira da Foz",
+                conPhone: "+351 233 415 372",
+                menuMore: "Mas temos muito mais a oferecer."
+            },
+            en: {
+                homeTitle: "Casa Fashani",
+                homeDesc: "Traditional Portuguese cuisine to share with family. Home-cooked dishes, fresh fish and charcoal grills, by the sea.",
+                reserveBtn: "Reserve",
+                menuTitle: "Signature Dishes",
+                menuBtn: "View Full Menu",
+                resTitle: "Reservations",
+                resNote: "For large groups, contact directly. Groups of 10+ people: maximum of 6 different dishes.",
+                resBtn: "Submit Reservation",
+                revTitle: "Reviews",
+                rev1: "Excellent hospitality and food.",
+                rev2: "Fresh fish, honest recommendations.",
+                rev3: "Above and beyond service.",
+                conTitle: "Contact",
+                conAddr: "Avenida do Brasil 122, Buarcos, Figueira da Foz",
+                conPhone: "+351 233 415 372",
+                menuMore: "But we have much more to offer."
+            },
+            fr: {
+                homeTitle: "Casa Fashani",
+                homeDesc: "Cuisine portugaise traditionnelle à partager en famille. Plats maison, poisson frais et grillades au charbon, au bord de la mer.",
+                reserveBtn: "Réserver",
+                menuTitle: "Plats Signature",
+                menuBtn: "Voir le Menu Complet",
+                resTitle: "Réservations",
+                resNote: "Pour les grands groupes, contactez directement. Groupes de 10+ personnes : maximum de 6 plats différents.",
+                resBtn: "Envoyer Réservation",
+                revTitle: "Avis",
+                rev1: "Excellente hospitalité et nourriture.",
+                rev2: "Poisson frais, recommandations honnêtes.",
+                rev3: "Service au-delà de l'excellent.",
+                conTitle: "Contact",
+                conAddr: "Avenida do Brasil 122, Buarcos, Figueira da Foz",
+                conPhone: "+351 233 415 372",
+                menuMore: "Mais nous avons beaucoup plus à offrir."
+            },
+            es: {
+                homeTitle: "Casa Fashani",
+                homeDesc: "Cocina portuguesa tradicional para compartir en familia. Platos caseros, pescado fresco y parrillas de carbón, junto al mar.",
+                reserveBtn: "Reservar",
+                menuTitle: "Platos Destacados",
+                menuBtn: "Ver Menú Completo",
+                resTitle: "Reservas",
+                resNote: "Para grupos grandes, contacte directamente. Grupos de 10+ personas: máximo de 6 platos diferentes.",
+                resBtn: "Enviar Reserva",
+                revTitle: "Reseñas",
+                rev1: "Excelente hospitalidad y comida.",
+                rev2: "Pescado fresco, recomendaciones honestas.",
+                rev3: "Servicio por encima de lo esperado.",
+                conTitle: "Contacto",
+                conAddr: "Avenida do Brasil 122, Buarcos, Figueira da Foz",
+                conPhone: "+351 233 415 372",
+                menuMore: "Pero tenemos mucho más que ofrecer."
+            }
+        };
+
+        let currentLang = 'pt';
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'flex';
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-selector button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            updateContent();
+        }
+
+        function updateContent() {
+    const lang = languages[currentLang];
+    document.querySelector('.homepage h1 .casa').textContent = 'Casa';
+    document.querySelector('.homepage h1 .fashani').textContent = 'Fashani';
+    document.querySelector('.homepage p').textContent = lang.homeDesc;
+    document.querySelector('.homepage .btn').textContent = lang.reserveBtn;
+    document.querySelector('#menu h2').textContent = lang.menuTitle;
+    document.querySelector('#menu-more').textContent = lang.menuMore;
+    // Add updates for menu dish titles
+    document.querySelectorAll('#menu .dish h3').forEach((h3, index) => {
+        const key = `menu${index + 1}`;
+        if (lang[key]) h3.textContent = lang[key];
+    });
+    document.querySelector('#menu .btn').textContent = lang.menuBtn;
+    document.querySelector('#reservations h2').textContent = lang.resTitle;
+    document.querySelector('#reservations p').textContent = lang.resNote;
+    // Remove the invalid button update: document.querySelector('#reservations .btn').textContent = lang.resBtn;
+    document.querySelector('#reviews h2').textContent = lang.revTitle;
+    document.querySelectorAll('#reviews .review span').forEach((span, index) => {
+        span.textContent = lang[`rev${index + 1}`];
+    });
+    document.querySelector('#contact h2').textContent = lang.conTitle;
+    document.querySelector('#contact p:first-of-type').textContent = lang.conAddr;
+    document.querySelector('#contact p:last-of-type').textContent = lang.conPhone;
+}
+
+        function handleReservation(event) {
+            event.preventDefault();
+            alert('Reserva enviada! Entraremos em contacto em breve.'); // Placeholder: Integrate with backend
+        }
+
+        // Show homepage by default
+        showSection('homepage');
+    </script>
+</body>
+</html>
